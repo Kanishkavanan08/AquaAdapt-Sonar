@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from models import EnvironmentState, WaveformRequest
 from signal_processing import generate_noise_profile, generate_sonar_waveform
-from decision_engine import optimize_sonar_configuration # NEW IMPORT
+from decision_engine import optimize_sonar_configuration
+from digital_twin import run_digital_twin_simulation
 
 app = FastAPI(title="AquaAdapt-Sonar API")
 
+# Global memory state
 current_environment = {
     "depth_m": 100.0,
     "temperature_c": 15.0,
@@ -39,13 +41,22 @@ async def generate_waveform_api(request: WaveformRequest):
     )
     return data
 
-# NEW ROUTE FOR PHASE 5
 @app.get("/api/optimize-sonar")
 async def optimize_sonar():
-    # 1. Get current noise profile based on environment
     noise_level = current_environment.get("ambient_noise_level", "Low")
     noise_data = generate_noise_profile(noise_level)
-    
-    # 2. Run the decision engine
     decision = optimize_sonar_configuration(current_environment, noise_data)
     return decision
+
+@app.get("/api/digital-twin")
+async def get_digital_twin_simulation():
+    noise_level = current_environment.get("ambient_noise_level", "Low")
+    noise_data = generate_noise_profile(noise_level)
+    decision = optimize_sonar_configuration(current_environment, noise_data)
+    
+    twin_results = run_digital_twin_simulation(
+        env=current_environment, 
+        noise=noise_data, 
+        adaptive_config=decision["recommended_config"]
+    )
+    return twin_results

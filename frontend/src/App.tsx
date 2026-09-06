@@ -1,7 +1,8 @@
 import EnvironmentSimulator from './EnvironmentSimulator';
+import DecisionCenter from './DecisionCenter';
+import DigitalTwin from './DigitalTwin'; // NEW IMPORT
 import SignalLab from './SignalLab';
 import WaveformGenerator from './WaveformGenerator';
-import DecisionCenter from './DecisionCenter'; // NEW IMPORT
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
       
       <div className="w-full max-w-4xl flex flex-col items-center gap-8">
         <EnvironmentSimulator />
-        <DecisionCenter /> {/* MOVED DECISION CENTER UP FOR BETTER UX */}
+        <DecisionCenter />
+        <DigitalTwin /> {/* PLACED AFTER DECISION CENTER */}
         <SignalLab />
         <WaveformGenerator />
       </div>
