@@ -1,7 +1,4 @@
-fastapi
-uvicorn
+streamlit
 numpy
 scipy
-sqlalchemy
-pydantic
-httpx
+pandas
