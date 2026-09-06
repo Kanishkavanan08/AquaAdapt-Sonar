@@ -58,7 +58,7 @@ config, explanations = optimize_sonar(battery, noise_level, depth)
 # --- TOP HUD DISPLAY ---
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Depth", f"{depth} m")
-col2.metric("Battery", f"{battery}%", delta="-5%" if battery < 40 else None, delta_inverse=True)
+col2.metric("Battery", f"{battery}%", delta="-5%" if battery < 40 else None, delta_color="inverse")
 col3.metric("Ambient Noise", noise_level)
 col4.metric("System Health", "CRITICAL" if battery <= 30 else "NOMINAL")
 
