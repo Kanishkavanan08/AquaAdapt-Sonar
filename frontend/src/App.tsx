@@ -1,5 +1,6 @@
 import EnvironmentSimulator from './EnvironmentSimulator';
 import SignalLab from './SignalLab';
+import WaveformGenerator from './WaveformGenerator'; // NEW IMPORT
 
 function App() {
   return (
@@ -9,10 +10,10 @@ function App() {
         <p className="text-slate-400">SIH 2026 Prototype • AUV Software-Defined Sonar</p>
       </div>
       
-      {/* We use a max-w-4xl container to wrap both components nicely */}
       <div className="w-full max-w-4xl flex flex-col items-center">
         <EnvironmentSimulator />
         <SignalLab />
+        <WaveformGenerator /> {/* NEW COMPONENT */}
       </div>
     </div>
   );
