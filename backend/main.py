@@ -1,6 +1,7 @@
 from fastapi import FastAPI
-from models import EnvironmentState, WaveformRequest # UPDATE IMPORTS
-from signal_processing import generate_noise_profile, generate_sonar_waveform # UPDATE IMPORTS
+from models import EnvironmentState, WaveformRequest
+from signal_processing import generate_noise_profile, generate_sonar_waveform
+from decision_engine import optimize_sonar_configuration # NEW IMPORT
 
 app = FastAPI(title="AquaAdapt-Sonar API")
 
@@ -28,7 +29,6 @@ async def analyze_noise():
     data = generate_noise_profile(noise_level)
     return data
 
-# NEW ROUTE FOR PHASE 4
 @app.post("/api/generate-waveform")
 async def generate_waveform_api(request: WaveformRequest):
     data = generate_sonar_waveform(
@@ -38,3 +38,14 @@ async def generate_waveform_api(request: WaveformRequest):
         power=request.power_percentage
     )
     return data
+
+# NEW ROUTE FOR PHASE 5
+@app.get("/api/optimize-sonar")
+async def optimize_sonar():
+    # 1. Get current noise profile based on environment
+    noise_level = current_environment.get("ambient_noise_level", "Low")
+    noise_data = generate_noise_profile(noise_level)
+    
+    # 2. Run the decision engine
+    decision = optimize_sonar_configuration(current_environment, noise_data)
+    return decision
