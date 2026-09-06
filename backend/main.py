@@ -3,10 +3,10 @@ from models import EnvironmentState, WaveformRequest
 from signal_processing import generate_noise_profile, generate_sonar_waveform
 from decision_engine import optimize_sonar_configuration
 from digital_twin import run_digital_twin_simulation
+from energy_model import calculate_energy_consumption # NEW IMPORT
 
 app = FastAPI(title="AquaAdapt-Sonar API")
 
-# Global memory state
 current_environment = {
     "depth_m": 100.0,
     "temperature_c": 15.0,
@@ -53,10 +53,19 @@ async def get_digital_twin_simulation():
     noise_level = current_environment.get("ambient_noise_level", "Low")
     noise_data = generate_noise_profile(noise_level)
     decision = optimize_sonar_configuration(current_environment, noise_data)
-    
     twin_results = run_digital_twin_simulation(
         env=current_environment, 
         noise=noise_data, 
         adaptive_config=decision["recommended_config"]
     )
     return twin_results
+
+# NEW ROUTE FOR PHASE 7
+@app.get("/api/energy-analytics")
+async def get_energy_analytics():
+    noise_level = current_environment.get("ambient_noise_level", "Low")
+    noise_data = generate_noise_profile(noise_level)
+    decision = optimize_sonar_configuration(current_environment, noise_data)
+    
+    energy_data = calculate_energy_consumption(decision["recommended_config"])
+    return energy_data

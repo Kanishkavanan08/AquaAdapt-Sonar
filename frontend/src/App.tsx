@@ -1,6 +1,7 @@
 import EnvironmentSimulator from './EnvironmentSimulator';
 import DecisionCenter from './DecisionCenter';
-import DigitalTwin from './DigitalTwin'; // NEW IMPORT
+import DigitalTwin from './DigitalTwin';
+import EnergyAnalytics from './EnergyAnalytics'; // NEW IMPORT
 import SignalLab from './SignalLab';
 import WaveformGenerator from './WaveformGenerator';
 
@@ -15,7 +16,8 @@ function App() {
       <div className="w-full max-w-4xl flex flex-col items-center gap-8">
         <EnvironmentSimulator />
         <DecisionCenter />
-        <DigitalTwin /> {/* PLACED AFTER DECISION CENTER */}
+        <DigitalTwin />
+        <EnergyAnalytics /> {/* ADDED HERE */}
         <SignalLab />
         <WaveformGenerator />
       </div>
