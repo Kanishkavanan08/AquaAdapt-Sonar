@@ -69,3 +69,23 @@ async def get_energy_analytics():
     
     energy_data = calculate_energy_consumption(decision["recommended_config"])
     return energy_data
+# ... (Keep all your existing code exactly the same, just append this to the bottom) ...
+
+# NEW ROUTE FOR PHASE 8
+@app.get("/api/system-status")
+async def get_system_status():
+    """Aggregates data for the top-level Mission Control HUD."""
+    noise_level = current_environment.get("ambient_noise_level", "Low")
+    noise_data = generate_noise_profile(noise_level)
+    decision = optimize_sonar_configuration(current_environment, noise_data)
+    
+    # Determine general system health based on battery
+    battery = current_environment.get("battery_percentage", 100)
+    health = "NOMINAL" if battery > 30 else "CRITICAL"
+
+    return {
+        "environment": current_environment,
+        "active_sonar": decision["recommended_config"],
+        "system_mode": "ADAPTIVE MODE ACTIVE",
+        "system_health": health
+    }

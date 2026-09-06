@@ -1,23 +1,25 @@
+import MissionControl from './MissionControl'; // NEW IMPORT
 import EnvironmentSimulator from './EnvironmentSimulator';
 import DecisionCenter from './DecisionCenter';
 import DigitalTwin from './DigitalTwin';
-import EnergyAnalytics from './EnergyAnalytics'; // NEW IMPORT
+import EnergyAnalytics from './EnergyAnalytics';
 import SignalLab from './SignalLab';
 import WaveformGenerator from './WaveformGenerator';
 
 function App() {
   return (
     <div className="min-h-screen bg-slate-900 flex flex-col items-center py-12 px-4">
-      <div className="w-full max-w-4xl mb-8 text-center">
+      <div className="w-full max-w-4xl mb-6 text-center">
         <h1 className="text-4xl font-extrabold text-white mb-2 tracking-tight">AquaAdapt <span className="text-cyan-500">Sonar</span></h1>
-        <p className="text-slate-400">SIH 2026 Prototype • AUV Software-Defined Sonar</p>
+        <p className="text-slate-400 mb-2">SIH 2026 Prototype • AUV Software-Defined Sonar</p>
       </div>
       
       <div className="w-full max-w-4xl flex flex-col items-center gap-8">
+        <MissionControl /> {/* HUD AT THE TOP */}
         <EnvironmentSimulator />
         <DecisionCenter />
         <DigitalTwin />
-        <EnergyAnalytics /> {/* ADDED HERE */}
+        <EnergyAnalytics />
         <SignalLab />
         <WaveformGenerator />
       </div>
