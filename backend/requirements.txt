@@ -1,3 +1,7 @@
 fastapi
 uvicorn
+numpy
+scipy
+sqlalchemy
 pydantic
+httpx
