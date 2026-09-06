@@ -1,10 +1,11 @@
-import MissionControl from './MissionControl'; // NEW IMPORT
+import MissionControl from './MissionControl';
 import EnvironmentSimulator from './EnvironmentSimulator';
 import DecisionCenter from './DecisionCenter';
 import DigitalTwin from './DigitalTwin';
 import EnergyAnalytics from './EnergyAnalytics';
 import SignalLab from './SignalLab';
 import WaveformGenerator from './WaveformGenerator';
+import HistoryLog from './HistoryLog'; // NEW IMPORT
 
 function App() {
   return (
@@ -15,13 +16,14 @@ function App() {
       </div>
       
       <div className="w-full max-w-4xl flex flex-col items-center gap-8">
-        <MissionControl /> {/* HUD AT THE TOP */}
+        <MissionControl />
         <EnvironmentSimulator />
         <DecisionCenter />
         <DigitalTwin />
         <EnergyAnalytics />
         <SignalLab />
         <WaveformGenerator />
+        <HistoryLog /> {/* ADDED AT THE BOTTOM */}
       </div>
     </div>
   );
